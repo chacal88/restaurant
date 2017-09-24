@@ -1,6 +1,6 @@
 db:
   image: mysql:latest
-  container_name: db
+  container_name: db-api
   volumes:
    - /var/lib/mysql
   ports:
@@ -13,7 +13,7 @@ db:
 
 phpfpm:
   image: lyberteam/php-fpm-7.1
-  container_name: phpfpm
+  container_name: phpfpm-api
   links:
     - db:db
   ports:
@@ -23,7 +23,7 @@ phpfpm:
 
 server:
   image: nginx:latest
-  container_name: server
+  container_name: server-api
   links:
     - phpfpm:phpfpm
   ports:

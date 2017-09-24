@@ -1,0 +1,5 @@
+server:
+  image: rest-painel
+  container_name: server-rest-painel
+  ports:
+   - "8001:80"
