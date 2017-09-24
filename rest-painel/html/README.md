@@ -1,5 +1,4 @@
-# Html
-
+# REST-PAINEL
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.3.
 
 ## Development server
@@ -25,3 +24,25 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+# Docker
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
+## Build docker image
+
+```
+$ docker build -t rest-painel . 
+```
+
+## Run the container
+
+```
+$ docker run -d -p 8001:80 rest-painel
+```
+
+
+The app will be available at http://localhost:8001
+
+You can easily tweak the nginx config in ```nginx/default.conf```
