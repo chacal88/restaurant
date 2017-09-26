@@ -14,54 +14,60 @@ import {EditComponent} from "./edit/edit.component";
 import {PasswordComponent} from "./password/password.component";
 
 import {ProfileComponent} from "./profile/profile.component";
+import {RestaurantService} from "./services/restaurant.service";
+import {FormsModule} from "@angular/forms";
 
 const appRoutes: Routes = [
-  {
-    path: 'dashboard', component: DashboardComponent,
-    children: [
-      {
-        path: 'evaluation/:id', component: EvaluationComponent
-      }
-    ]
-  },
-  {
-    path: 'dishes', component: DisheComponent,
-    children: [
-      {
-        path: 'new', component: NewDisheComponent
-      },
-      {
-        path: 'edit/:id', component: EditDisheComponent
-      },
-    ]
-  },
-  {
-    path: 'edit', component: EditComponent
-  },
-  {
-    path: 'password', component: PasswordComponent
-  },
-  {
-    path: 'profile', component: ProfileComponent
-  },
+    {
+        path: 'dashboard', component: DashboardComponent,
+        children: [
+            {
+                path: 'evaluation/:id', component: EvaluationComponent
+            }
+        ]
+    },
+    {
+        path: 'dishes', component: DisheComponent,
+        children: [
+            {
+                path: 'new', component: NewDisheComponent
+            },
+            {
+                path: 'edit/:id', component: EditDisheComponent
+            },
+        ]
+    },
+    {
+        path: 'edit', component: EditComponent
+    },
+    {
+        path: 'password', component: PasswordComponent
+    },
+    {
+        path: 'profile', component: ProfileComponent
+    },
 ];
 
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(appRoutes),
-    CommonModule
-  ],
-  declarations: [
-    DashboardComponent,
-    EvaluationComponent,
-    DisheComponent,
-    NewDisheComponent,
-    EditDisheComponent,
-    EditComponent,
-    PasswordComponent,
-    ProfileComponent,
-  ]
+    imports: [
+        FormsModule,
+        RouterModule.forRoot(appRoutes),
+        CommonModule
+    ],
+    declarations: [
+        DashboardComponent,
+        EvaluationComponent,
+        DisheComponent,
+        NewDisheComponent,
+        EditDisheComponent,
+        EditComponent,
+        PasswordComponent,
+        ProfileComponent,
+    ],
+    providers: [
+        RestaurantService
+    ]
 })
 
 export class RestaurantsModule {
