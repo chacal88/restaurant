@@ -14,12 +14,15 @@
 Dusterio\LumenPassport\LumenPassport::routes($app);
 
 $app->get('/', function () use ($app) {
+
     //return $app->version();
     return view('teste');
 });
 
 $app->group(['prefix' => 'api/v1', 'namespace' => 'Api\V1'], function () use ($app) {
+
     $app->get('restaurants/by-address', 'RestaurantsController@getByAddress');
+    $app->get('restaurants/by-coords', 'RestaurantsController@getByCoords');
     $app->post('restaurants/vote', 'VotesController@store');
     $app->get('restaurants/{id:[0-9]+}/view-phone', 'RestaurantsController@viewPhone');
 
@@ -27,9 +30,12 @@ $app->group(['prefix' => 'api/v1', 'namespace' => 'Api\V1'], function () use ($a
     $app->get('restaurants/{id:[0-9]+}', 'RestaurantsController@show');
     $app->get('dishes', "DishesController@index");
     $app->get('restaurants/{id:[0-9]+}/photos', 'RestaurantPhotosController@index');
+
+    $app->post('auth/register','AuthController@register');
 });
 
-$app->group(['prefix' => 'api/v1', 'namespace' => 'Api\V1', 'middleware'=>['auth']], function () use ($app) {
+$app->group(['prefix' => 'api/v1', 'namespace' => 'Api\V1', 'middleware' => ['auth']], function () use ($app) {
+
     $app->get('restaurants', 'RestaurantsController@index');
     $app->post('restaurants', 'RestaurantsController@store');
     $app->put('restaurants/{id:[0-9]+}', 'RestaurantsController@update');

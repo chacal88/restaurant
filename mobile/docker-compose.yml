@@ -1,0 +1,14 @@
+version: '2.1'
+
+services:
+
+  my-app:
+    image: kauewinker/ionic3
+    container_name: app-ionic3
+    privileged: true
+    volumes:
+      - ./html/:/myApp:z
+      - ~/.gradle:/root/.gradle
+      - /dev/bus/usb:/dev/bus/usb
+    tty: true
+    stdin_open: true

@@ -7,37 +7,52 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class AppHttpService {
+
     protected url: string;
+
     protected header: Headers;
 
     constructor(protected http: Http, private router: Router) {
+
         this.setAccessToken();
     }
 
     request() {
+
         return this.http;
     }
 
     getUser() {
+
         return this.builder('auth/me').list();
     }
 
     setAccessToken() {
+
         let token = this.getCookie('token');
-        this.header = new Headers({'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjdhMmU0YTAwNmRiNTQwZDFiYmU3YjZmZjI0M2NkN2VkMTYwMmM3ZTY2MDhjZGIwZjcyZmZjM2VjZTM1ZDU2NTI5YzgxOGZjNTQ2YzNhMzczIn0.eyJhdWQiOiI1IiwianRpIjoiN2EyZTRhMDA2ZGI1NDBkMWJiZTdiNmZmMjQzY2Q3ZWQxNjAyYzdlNjYwOGNkYjBmNzJmZmMzZWNlMzVkNTY1MjljODE4ZmM1NDZjM2EzNzMiLCJpYXQiOjE1MDYzODY3MDksIm5iZiI6MTUwNjM4NjcwOSwiZXhwIjoxNTM3OTIyNzA5LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.ISC30VkAuu4ftcDGHtsAcQmHcig_Eg4y728rv1v9S1L-LbunSGBJKlZHOvJh5eDPgSgwrfKXnb0d0DMY_VV_a9LnVErbOk0XfatV_3OzvcNdEy72CoeJ-PFzOav3qs8hpzPAuXJtW-0pVBYFL7rN5o9Idmz8XnSeXOKqfZOFkEsYn95yOK30C_w3A7QCQXl7L17IVZJcdr_kRQz61V2uXtmAKVDwyS9kVnQbQblJ_3S_x5hyCeEkqweyW0SbtYM6oGu1VGSBambraAXqrZQ_1EPkQzL0xoRwSbdmaUxmp2xH3RFBBD_eIuxqzsaUXM9dges-mNbYwsV1beLQQd0cjhoYzMH5iYgS9pZj75bBwtkInIqkNj-LnQe5h7HMbCq9l0pLtIkGy0d7pmbR75lzsZ5a6v3smCs1mwCB3a3UJtJSFqerMKjoujMQ2FxVzIoFFOZLdKzNRrF1MnZ0bkWr5P1zFWbVZHyFLenvHr2Yjlxu1O1DeDfjMsksQmmG0nN3kqqDxe3LhVp53uatiREw5hbn7bwyfR5TgQHaQHPoNy-eCBzx32FdYJ8IQOzwGVLp0UU7bA21QbItCvxRgM7jmeuXlaE5UKWYg0nXK7kOvYm1LN0Fhm8sAfnc0qWO-WPd1TGC01D12COS4GsN06u6Bfeef3XPwjoQ6vdJQo5paTA', 'Accept': 'application/json'});
-        // this.header = new Headers({'Authorization': 'Bearer ' + token, 'Accept': 'application/json'});
+
+        // this.header = new Headers({
+        //     'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjdiMzA4ZDJkYTIxNzQ4YjFiYmFjZDFiMmEzMWIxN2E4MjVjMTIyMTk2Njc1YTI2YzFjNjAyNTk0NzUxYTU1MWZmMTgxZmZlMTQxY2U2NTg2In0.eyJhdWQiOiI1IiwianRpIjoiN2IzMDhkMmRhMjE3NDhiMWJiYWNkMWIyYTMxYjE3YTgyNWMxMjIxOTY2NzVhMjZjMWM2MDI1OTQ3NTFhNTUxZmYxODFmZmUxNDFjZTY1ODYiLCJpYXQiOjE1MDY2NDY0OTUsIm5iZiI6MTUwNjY0NjQ5NSwiZXhwIjoxNTM4MTgyNDk1LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.VLSjNs7bem9KCS0V9cj-GfqPH45RxLJ_7K3YlRDHLZKaiCawjJAKPGJur5TTI_evZHxJ2mWJ_tqy47blOX-s1WWCvl_D2jCp6PDC4NzVLUTyqLZRAWwAYlZ3P3gxp2QlvIWjGJzIkftnYUlJa8TDhSB2CXVUIgAaVs1K7FOedaQJCBl2TGkS5_B8-CLNJDkxcMWUMW-6Zu3QKAWD5imvOLa6j2Yzllaf11wOzdLgktY9xZq59XSb4J5j94kLK3DLgZJ2WwqC1V5e5foPKh4Jf730-HxC3ulIQAUOrlGi_Ary0XO8GcLKeefUJG2rLjEgF1wrjfcUbfQZp-GI2O-RWng7DuF9gj2j5XIXlYQZkzKMyBbvS0JUaWKGlPkwMDGoSIoPIaEGvdZD9CFztnGNsaxdzn6FSuHCdTmVyDPJyiYXY1mYyv4roSG1YFuvX9dZEHYGBYbX-O0gUdrVz-zYZzeegRKymsKo5qC4mIKXmUOQjHET-VxHj3luylInP-nbSRMynWJBa6vexQVyXfh66btvNVU8SuWQJlhhPccneDB11OyzFnsbM75O_pYazOUUtvHOYJF4AaN1uzdbhDk5zRxSTR1XSdmCEKPG9dYqhJ_3v0TIn9xwMnXXGqaJB8Tdf_xombs3suAmWENUqUNWOkKxYzLsgqS86XS7B5QnRns',
+        //     'Accept': 'application/json'
+        // });
+        this.header = new Headers({'Authorization': 'Bearer ' + token, 'Accept': 'application/json'});
     }
 
     builder(resource: string) {
+
         this.url = environment.server_url + '/api/v1/' + resource;
+
         return this;
     }
 
     list(options: any = {}) {
+
         let url = this.url;
 
         if (options.filters !== undefined) {
+
             let filters = options.filters;
+
             filters.forEach((item, index) => {
                 let field = Object.keys(item)[0];
                 let value = item[field];
@@ -46,36 +61,48 @@ export class AppHttpService {
         }
 
         let observable = this.http.get(url, {headers: this.header})
+
         return this.toPromise(observable);
     }
 
     view(id: number) {
+
         let observable = this.http.get(this.url + '/' + id, {headers: this.header})
+
         return this.toPromise(observable);
     }
 
     update(id: number, data: object) {
+
         let observable = this.http.put(this.url + '/' + id, data, {headers: this.header})
+
         return this.toPromise(observable);
     }
 
     insert(data: Object) {
+
         let observable = this.http.post(this.url, data, {headers: this.header})
+
         return this.toPromise(observable);
     }
 
     delete(id: number) {
+
         let observable = this.http.delete(this.url + '/' + id, {headers: this.header});
+
         return this.toPromise(observable);
     }
 
     protected toPromise(request) {
+
         return request.toPromise()
             .then((res) => {
                 return res.json() || {}
             })
             .catch((err) => {
+
                 let message = 'Algo deu errado no servidor, informe o erro ' + err.status + ' ao administrador';
+
                 if (err.status === 401) {
                     message = 'Você não tem permissão para ver isso, informe um usuário e senha válidos';
                     this.router.navigate(['/login']);
@@ -94,13 +121,17 @@ export class AppHttpService {
     }
 
     private getCookie(name: string) {
+
         let cookies = document.cookie;
+
         if (!cookies) {
             return null;
         }
 
         let cookiesCollection: string[] = cookies.split(';');
-        for (let i = 0; i < cookiesCollection.length; i++) {
+
+        for (let i = 0, size = cookiesCollection.length; i < size; i++) {
+
             let cookieCurrent = cookiesCollection[i].split('=');
 
             if (cookieCurrent[0].trim() === name) {

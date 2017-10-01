@@ -1,0 +1,46 @@
+<ul id="slide-out" class="side-nav">
+  <li *ngIf="me !== null"><div class="user-view">
+    <div class="background lime">
+      <img src="http://images.all-free-download.com/images/graphiclarge/wood_background_hd_picture_5_169842.jpg">
+    </div>
+    <a><img class="circle" src="https://secure.gravatar.com/avatar/beef4a109b5744b8b51537c0136f7e3b"></a>
+    <a><span class="white-text name">{{me.name}}</span></a>
+    <a><span class="white-text email">{{me.email}}</span></a>
+  </div></li>
+
+  <li><div class="divider"></div></li>
+  <li *ngIf="me === null"><a [routerLink]="['/login']">Login</a></li>
+  <li *ngIf="me === null"><a [routerLink]="['/register']">Registrar-se</a></li>
+  <li *ngIf="me !== null" [routerLinkActive]="['active']"><a class="subheader">Minha conta</a></li>
+  <li *ngIf="me !== null" [routerLinkActive]="['active']"><a [routerLink]="['/profile']"><i class="material-icons">account_circle</i>Editar meus dados</a></li>
+  <li *ngIf="me !== null"><a [routerLink]="['/password']"><i class="material-icons">security</i>Trocar senha</a></li>
+  <li *ngIf="me !== null"><a [routerLink]="['/logout']"><i class="material-icons">cancel</i>sair</a></li>
+</ul>
+
+<header>
+  <nav>
+    <div class="nav-wrapper amber">
+      <div class="row">
+        <div class="col s12">
+          <a [routerLink]="['/']" class="brand-logo">Guia de restaurantes</a>
+          <ul id="nav-mobile" class="right">
+            <li><a data-activates="slide-out" id="showMenu"><i class="material-icons">menu</i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="page-footer  blue-grey lighten-2">
+  <div class="footer-copyright">
+    <div class="container">
+      © 2017 by Kaue Rodrigues
+      <a class="white-text lighten-5 right">More Links</a>
+    </div>
+  </div>
+</footer>

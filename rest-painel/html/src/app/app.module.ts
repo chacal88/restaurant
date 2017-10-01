@@ -6,6 +6,7 @@ import {AppHttpService} from "./app.http.service";
 import {AppComponent} from './app.component';
 import {HttpModule} from "@angular/http";
 import {FormsModule} from "@angular/forms";
+import {UserModule} from "./modules/user/user.module";
 
 const appRoutes: Routes = [
     {path: '', redirectTo: '/dashboard', pathMatch: 'full'}
@@ -20,6 +21,7 @@ const appRoutes: Routes = [
         FormsModule,
         HttpModule,
         RestaurantsModule,
+        UserModule,
         RouterModule.forRoot(appRoutes)
     ],
     providers: [
